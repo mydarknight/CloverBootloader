@@ -3337,16 +3337,6 @@ BdsLibEnumerateAllBootOption (
           BdsLibBuildOptionFromHandle (BlockIoHandles[Index], BdsBootOptionList, Buffer);
           VirtioNumber++;
           break;
-
-      case BDS_EFI_MESSAGE_USB_DEVICE_BOOT:
-        if (UsbNumber != 0) {
-          UnicodeSPrint (Buffer, sizeof (Buffer), L"%s %d", BdsLibGetStringById (STRING_TOKEN (STR_DESCRIPTION_USB)), UsbNumber);
-        } else {
-          UnicodeSPrint (Buffer, sizeof (Buffer), L"%s", BdsLibGetStringById (STRING_TOKEN (STR_DESCRIPTION_USB)));
-        }
-        BdsLibBuildOptionFromHandle (BlockIoHandles[Index], BdsBootOptionList, Buffer);
-        UsbNumber++;
-        break;
           
       case BDS_EFI_MESSAGE_MISC_BOOT:
       default:
@@ -3357,6 +3347,16 @@ BdsLibEnumerateAllBootOption (
         }
         BdsLibBuildOptionFromHandle (BlockIoHandles[Index], BdsBootOptionList, Buffer);
         MiscNumber++;
+        break;
+
+      case BDS_EFI_MESSAGE_USB_DEVICE_BOOT:
+        if (UsbNumber != 0) {
+          UnicodeSPrint (Buffer, sizeof (Buffer), L"%s %d", BdsLibGetStringById (STRING_TOKEN (STR_DESCRIPTION_USB)), UsbNumber);
+        } else {
+          UnicodeSPrint (Buffer, sizeof (Buffer), L"%s", BdsLibGetStringById (STRING_TOKEN (STR_DESCRIPTION_USB)));
+        }
+        BdsLibBuildOptionFromHandle (BlockIoHandles[Index], BdsBootOptionList, Buffer);
+        UsbNumber++;
         break;
       }
     }
