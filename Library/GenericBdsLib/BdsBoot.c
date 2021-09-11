@@ -3249,8 +3249,8 @@ BdsLibEnumerateAllBootOption (
   // The Removable[] array is used by the for-loop below to create removable media boot options 
   // at first, and then to create fixed media boot options.
   //
-  Removable[0]  = FALSE;
-  Removable[1]  = TRUE;
+  Removable[0]  = TRUE;
+  Removable[1]  = FALSE;
 
   gBS->LocateHandleBuffer (
         ByProtocol,
@@ -3276,7 +3276,7 @@ BdsLibEnumerateAllBootOption (
             //
       // firstly fixed block io then the removable block io
       //
-      if (BlkIo->RemovableMedia->Media == Removable[RemovableIndex]) {
+      if (BlkIo->Media->RemovableMedia == Removable[RemovableIndex]) {
         continue;
       }
     
@@ -3299,7 +3299,7 @@ BdsLibEnumerateAllBootOption (
       //
       case BDS_EFI_MESSAGE_ATAPI_BOOT:
       case BDS_EFI_MESSAGE_SATA_BOOT:
-        if (BlkIo->RemovableMedia->Media) {
+        if (BlkIo->Media->RemovableMedia) {
           if (CdromNumber != 0) {
             UnicodeSPrint (Buffer, sizeof (Buffer), L"%s %d", BdsLibGetStringById (STRING_TOKEN (STR_DESCRIPTION_CD_DVD)), CdromNumber);
           } else {
