@@ -18,10 +18,10 @@ WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
 //
 // Clover File location to boot from on removable media devices
 //
-#define CLOVER_MEDIA_FILE_NAME_IA32    L"\\EFI\\CLOVER\\CLOVERIA32.EFI"
-#define CLOVER_MEDIA_FILE_NAME_IA64    L"\\EFI\\CLOVER\\CLOVERIA64.EFI"
-#define CLOVER_MEDIA_FILE_NAME_X64     L"\\EFI\\CLOVER\\CLOVERX64.EFI"
-#define CLOVER_MEDIA_FILE_NAME_ARM     L"\\EFI\\CLOVER\\CLOVERARM.EFI"
+#define CLOVER_MEDIA_FILE_NAME_IA32    L"\\EFI\\LEGACY\\LEGACYIA32.EFI"
+#define CLOVER_MEDIA_FILE_NAME_IA64    L"\\EFI\\LEGACY\\LEGACYIA64.EFI"
+#define CLOVER_MEDIA_FILE_NAME_X64     L"\\EFI\\LEGACY\\LEGACYX64.EFI"
+#define CLOVER_MEDIA_FILE_NAME_ARM     L"\\EFI\\LEGACY\\LEGACYARM.EFI"
 
 #if   defined (MDE_CPU_IA32)
 #define CLOVER_MEDIA_FILE_NAME   CLOVER_MEDIA_FILE_NAME_IA32
@@ -3276,7 +3276,7 @@ BdsLibEnumerateAllBootOption (
             //
       // firstly fixed block io then the removable block io
       //
-      if (BlkIo->Media->RemovableMedia == Removable[RemovableIndex]) {
+      if (BlkIo->RemovableMedia->Media == Removable[RemovableIndex]) {
         continue;
       }
     
@@ -3299,7 +3299,7 @@ BdsLibEnumerateAllBootOption (
       //
       case BDS_EFI_MESSAGE_ATAPI_BOOT:
       case BDS_EFI_MESSAGE_SATA_BOOT:
-        if (BlkIo->Media->RemovableMedia) {
+        if (BlkIo->RemovableMedia->Media) {
           if (CdromNumber != 0) {
             UnicodeSPrint (Buffer, sizeof (Buffer), L"%s %d", BdsLibGetStringById (STRING_TOKEN (STR_DESCRIPTION_CD_DVD)), CdromNumber);
           } else {
@@ -3316,16 +3316,6 @@ BdsLibEnumerateAllBootOption (
         }
 //        DEBUG ((DEBUG_INFO | DEBUG_LOAD, "Buffer: %S\n", Buffer));
         BdsLibBuildOptionFromHandle (BlockIoHandles[Index], BdsBootOptionList, Buffer);
-        break;
-
-      case BDS_EFI_MESSAGE_USB_DEVICE_BOOT:
-        if (UsbNumber != 0) {
-          UnicodeSPrint (Buffer, sizeof (Buffer), L"%s %d", BdsLibGetStringById (STRING_TOKEN (STR_DESCRIPTION_USB)), UsbNumber);
-        } else {
-          UnicodeSPrint (Buffer, sizeof (Buffer), L"%s", BdsLibGetStringById (STRING_TOKEN (STR_DESCRIPTION_USB)));
-        }
-        BdsLibBuildOptionFromHandle (BlockIoHandles[Index], BdsBootOptionList, Buffer);
-        UsbNumber++;
         break;
 
       case BDS_EFI_MESSAGE_SCSI_BOOT:
@@ -3347,6 +3337,16 @@ BdsLibEnumerateAllBootOption (
           BdsLibBuildOptionFromHandle (BlockIoHandles[Index], BdsBootOptionList, Buffer);
           VirtioNumber++;
           break;
+
+      case BDS_EFI_MESSAGE_USB_DEVICE_BOOT:
+        if (UsbNumber != 0) {
+          UnicodeSPrint (Buffer, sizeof (Buffer), L"%s %d", BdsLibGetStringById (STRING_TOKEN (STR_DESCRIPTION_USB)), UsbNumber);
+        } else {
+          UnicodeSPrint (Buffer, sizeof (Buffer), L"%s", BdsLibGetStringById (STRING_TOKEN (STR_DESCRIPTION_USB)));
+        }
+        BdsLibBuildOptionFromHandle (BlockIoHandles[Index], BdsBootOptionList, Buffer);
+        UsbNumber++;
+        break;
           
       case BDS_EFI_MESSAGE_MISC_BOOT:
       default:
