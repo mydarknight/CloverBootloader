@@ -41,6 +41,27 @@ WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
 BOOLEAN mEnumBootDevice = FALSE;
 EFI_HII_HANDLE gBdsLibStringPackHandle = NULL;
 
+/** 
+  These codes below fake Secure Boot support for Microsoft Windows,
+  it may helps Windows 11 installation on older PCs.
+**/
+
+gRT->SetVariable (
+                      L"SetupMode",
+                      &gEfiGlobalVariableGuid,
+                      EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS,
+                      1,
+                      1
+);
+
+gRT->SetVariable (
+                      L"SecureBoot",
+                      &gEfiGlobalVariableGuid,
+                      EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS,
+                      1,
+                      0
+);
+
 /**
   The constructor function register UNI strings into imageHandle.
   
