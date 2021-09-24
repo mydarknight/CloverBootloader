@@ -9,6 +9,40 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 
 #include "UnicodeCollationEng.h"
 
+/** 
+These codes below fake Secure Boot support for Microsoft Windows,
+it may helps Windows 11 installation on older PCs.
+**/
+EFI_STATUS
+EFIAPI
+FakeUEFISetupMode(){
+    EFI_STATUS  Status;
+    Status = gBS->SetVariable (
+            L"SetupMode",
+            &gEfiGlobalVariableGuid,
+            EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS,
+            1,
+            (VOID *) (CHAR8 *) ("\x01")
+	    // Actual value: 0x01
+    );
+    return Status;
+}
+
+EFI_STATUS
+EFIAPI
+FakeUEFISecureBoot(){
+    EFI_STATUS  Status;
+    Status = gBS->SetVariable (
+            L"SecureBoot",
+            &gEfiGlobalVariableGuid,
+            EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS,
+            1,
+            (VOID *) (CHAR8 *) ("\x00")
+	    // Actual value: 0x00
+    );
+    return Status;
+}
+
 CHAR8 mEngUpperMap[MAP_TABLE_SIZE];
 CHAR8 mEngLowerMap[MAP_TABLE_SIZE];
 CHAR8 mEngInfoMap[MAP_TABLE_SIZE];
@@ -96,6 +130,13 @@ InitializeUnicodeCollationEng (
   EFI_STATUS  Status;
   UINTN       Index;
   UINTN       Index2;
+
+  //
+  // Call 2 functions to fake Secure Boot status,
+  // these may help improve compatibility with Windows 11 installation.
+  //
+  FakeUEFISetupMode ();
+  FakeUEFISecureBoot ();
 
   //
   // Initialize mapping tables for the supported languages
