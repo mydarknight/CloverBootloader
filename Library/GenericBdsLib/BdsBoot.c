@@ -81,7 +81,7 @@ FakeUEFISecureBoot(){
             &gEfiGlobalVariableGuid,
             EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS,
             1,
-            (VOID *) (UINT8) (0x00)
+            (VOID *) (UINT8) (0x02)
     );
     return Status;
 }
