@@ -477,7 +477,7 @@ EmuVariableControlProtocolInstallEmulation (
                         &gEfiGlobalVariableGuid,
                         EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS,
                         1,
-                        1
+                        (VOID *) (UINT8) (0x01)
   );
 
   gRT->SetVariable (
@@ -485,7 +485,7 @@ EmuVariableControlProtocolInstallEmulation (
                         &gEfiGlobalVariableGuid,
                         EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS,
                         1,
-                        0
+                        (VOID *) (UINT8) (0x00)
   );
 }
 
