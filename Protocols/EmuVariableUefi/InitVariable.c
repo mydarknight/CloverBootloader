@@ -468,25 +468,6 @@ EmuVariableControlProtocolInstallEmulation (
   DBG(", set Status=%r\n", Status);
   
   return Status; //EFI_SUCCESS;
-/**
-  These codes below fake Secure Boot support for Microsoft Windows,
-  it may helps Windows 11 installation on older PCs.
-**/
-  gRT->SetVariable (
-                        L"SetupMode",
-                        &gEfiGlobalVariableGuid,
-                        EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS,
-                        1,
-                        (VOID *) (UINT8) (0x01)
-  );
-
-  gRT->SetVariable (
-                        L"SecureBoot",
-                        &gEfiGlobalVariableGuid,
-                        EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS,
-                        1,
-                        (VOID *) (UINT8) (0x00)
-  );
 }
 
 /**
@@ -584,5 +565,4 @@ VariableServiceInitialize (
   
   return EFI_SUCCESS;
 }
-
 
