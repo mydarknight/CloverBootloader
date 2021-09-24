@@ -67,7 +67,7 @@ FakeUEFISetupMode(){
             &gEfiGlobalVariableGuid,
             EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS,
             1,
-            (VOID *) (UINT8) (4)
+            (VOID *) (INT8) (0x01)
 	    // Actual value: 0x01
     );
     return Status;
