@@ -60,21 +60,27 @@ EFIAPI
 These codes below fake Secure Boot support for Microsoft Windows,
 it may helps Windows 11 installation on older PCs.
 **/
-gRT->SetVariable (
-		L"SetupMode",
-		&gEfiGlobalVariableGuid,
-		EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS,
-		1,
-		(VOID *) (UINT8) (0x01)
-);
+FakeUEFISetupMode(){
+    Status = gRT->SetVariable (
+            L"SetupMode",
+            &gEfiGlobalVariableGuid,
+            EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS,
+            1,
+            (VOID *) (UINT8) (0x01)
+    );
+    return Status;
+}
 
-gRT->SetVariable (
-		L"SecureBoot",
-		&gEfiGlobalVariableGuid,
-		EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS,
-		1,
-		(VOID *) (UINT8) (0x00)
-);
+FakeUEFISecureBoot(){
+    Status = gRT->SetVariable (
+            L"SecureBoot",
+            &gEfiGlobalVariableGuid,
+            EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS,
+            1,
+            (VOID *) (UINT8) (0x00)
+    );
+    return Status;
+}
 
 GenericBdsLibConstructor (
   IN EFI_HANDLE        ImageHandle,
@@ -3264,6 +3270,12 @@ BdsLibEnumerateAllBootOption (
   // Delete invalid boot option
   //
   BdsDeleteAllInvalidEfiBootOption ();
+  //
+  // Call 2 functions to fake Secure Boot status,
+  // these may help improve compatibility with Windows 11 installation.
+  //
+  FakeUEFISetupMode ();
+  FakeUEFISecureBoot ();
 
   //
   // Parse removable media followed by fixed media.
