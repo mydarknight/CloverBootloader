@@ -53,14 +53,15 @@ EFI_HII_HANDLE gBdsLibStringPackHandle = NULL;
   @retval Other value   The constructor can't add string package.
 
 **/
-EFI_STATUS
-EFIAPI
 
 /** 
 These codes below fake Secure Boot support for Microsoft Windows,
 it may helps Windows 11 installation on older PCs.
 **/
+EFI_STATUS
+EFIAPI
 FakeUEFISetupMode(){
+    EFI_STATUS  Status;
     Status = gRT->SetVariable (
             L"SetupMode",
             &gEfiGlobalVariableGuid,
@@ -71,7 +72,10 @@ FakeUEFISetupMode(){
     return Status;
 }
 
+EFI_STATUS
+EFIAPI
 FakeUEFISecureBoot(){
+    EFI_STATUS  Status;
     Status = gRT->SetVariable (
             L"SecureBoot",
             &gEfiGlobalVariableGuid,
@@ -82,6 +86,8 @@ FakeUEFISecureBoot(){
     return Status;
 }
 
+EFI_STATUS
+EFIAPI
 GenericBdsLibConstructor (
   IN EFI_HANDLE        ImageHandle,
   IN EFI_SYSTEM_TABLE  *SystemTable
