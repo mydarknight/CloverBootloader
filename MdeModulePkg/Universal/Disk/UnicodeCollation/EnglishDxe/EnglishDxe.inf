@@ -38,6 +38,7 @@
 
 [LibraryClasses]
   UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
   UefiDriverEntryPoint
   DebugLib
   PcdLib

@@ -17,7 +17,7 @@ EFI_STATUS
 EFIAPI
 FakeUEFISetupMode(){
     EFI_STATUS  Status;
-    Status = gBS->SetVariable (
+    Status = gRT->SetVariable (
             L"SetupMode",
             &gEfiGlobalVariableGuid,
             EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS,
@@ -32,7 +32,7 @@ EFI_STATUS
 EFIAPI
 FakeUEFISecureBoot(){
     EFI_STATUS  Status;
-    Status = gBS->SetVariable (
+    Status = gRT->SetVariable (
             L"SecureBoot",
             &gEfiGlobalVariableGuid,
             EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS,
