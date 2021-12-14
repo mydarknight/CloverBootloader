@@ -157,7 +157,7 @@ DownloadSource () {
 
     if [[ ! -f ${DIR_DOWNLOADS}/${ISL_VERSION}.tar.xz ]]; then
         echo "Status: ${ISL_VERSION} not found."
-        curl -o download.tmp --remote-name http://isl.gforge.inria.fr/${ISL_VERSION}.tar.xz || exit 1
+        curl -o download.tmp -L --remote-name https://web.archive.org/web/20200119090127if_/http://isl.gforge.inria.fr:80/${ISL_VERSION}.tar.xz || exit 1
         mv download.tmp ${ISL_VERSION}.tar.xz
     fi
 
