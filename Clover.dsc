@@ -687,18 +687,18 @@
 !endif
 
   # Usb Support
-  MdeModulePkg/Bus/Pci/UhciDxe/UhciDxe.inf
-  Drivers/OhciDxe/OhciDxe.inf
-  MdeModulePkg/Bus/Pci/EhciDxe/EhciDxe.inf
-#  MdeModulePkg/Bus/Pci/XhciDxe/XhciDxe.inf
-  Drivers/XhciDxe/XhciDxe.inf
-#  MdeModulePkg/Bus/Usb/UsbBusDxe/UsbBusDxe.inf
-  Drivers/UsbBusDxe/UsbBusDxe.inf
-#  MdeModulePkg/Bus/Usb/UsbKbDxe/UsbKbDxe.inf
-  Drivers/UsbKbDxe/UsbKbDxe.inf
-  MdeModulePkg/Bus/Usb/UsbMassStorageDxe/UsbMassStorageDxe.inf
-  MdeModulePkg/Bus/Usb/UsbMouseDxe/UsbMouseDxe.inf
-  #Drivers/UsbMouseDxe/UsbMouseDxe.inf
+#   MdeModulePkg/Bus/Pci/UhciDxe/UhciDxe.inf
+#   Drivers/OhciDxe/OhciDxe.inf
+#   MdeModulePkg/Bus/Pci/EhciDxe/EhciDxe.inf
+# #  MdeModulePkg/Bus/Pci/XhciDxe/XhciDxe.inf
+#   Drivers/XhciDxe/XhciDxe.inf
+# #  MdeModulePkg/Bus/Usb/UsbBusDxe/UsbBusDxe.inf
+#   Drivers/UsbBusDxe/UsbBusDxe.inf
+# #  MdeModulePkg/Bus/Usb/UsbKbDxe/UsbKbDxe.inf
+#   Drivers/UsbKbDxe/UsbKbDxe.inf
+#   MdeModulePkg/Bus/Usb/UsbMassStorageDxe/UsbMassStorageDxe.inf
+#   MdeModulePkg/Bus/Usb/UsbMouseDxe/UsbMouseDxe.inf
+#   #Drivers/UsbMouseDxe/UsbMouseDxe.inf
 
   # ISA Support
   PcAtChipsetPkg/IsaAcpiDxe/IsaAcpi.inf
