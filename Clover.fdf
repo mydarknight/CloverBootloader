@@ -206,33 +206,33 @@ INF   LegacyBios/Region2Dxe/LegacyRegion2Dxe.inf
 !endif
 
     # Usb Support
-!ifndef DISABLE_USB_SUPPORT
+# !ifndef DISABLE_USB_SUPPORT
 
-!ifndef DISABLE_USB_CONTROLLERS
-  INF  MdeModulePkg/Bus/Pci/UhciDxe/UhciDxe.inf
-!ifndef DISABLE_USB_MASS_STORAGE
-  INF  MdeModulePkg/Bus/Pci/EhciDxe/EhciDxe.inf
-!endif
-!endif
+# !ifndef DISABLE_USB_CONTROLLERS
+#   INF  MdeModulePkg/Bus/Pci/UhciDxe/UhciDxe.inf
+# !ifndef DISABLE_USB_MASS_STORAGE
+#   INF  MdeModulePkg/Bus/Pci/EhciDxe/EhciDxe.inf
+# !endif
+# !endif
 
-!ifdef ENABLE_USB_OHCI
-  INF  Drivers/OhciDxe/OhciDxe.inf
-!endif
-!ifdef ENABLE_USB_XHCI
-  #INF  MdeModulePkg/Bus/Pci/XhciDxe/XhciDxe.inf
-  INF  Drivers/XhciDxe/XhciDxe.inf
-!endif
+# !ifdef ENABLE_USB_OHCI
+#   INF  Drivers/OhciDxe/OhciDxe.inf
+# !endif
+# !ifdef ENABLE_USB_XHCI
+#   #INF  MdeModulePkg/Bus/Pci/XhciDxe/XhciDxe.inf
+#   INF  Drivers/XhciDxe/XhciDxe.inf
+# !endif
 
-  #INF  MdeModulePkg/Bus/Usb/UsbBusDxe/UsbBusDxe.inf
-  INF  Drivers/UsbBusDxe/UsbBusDxe.inf
-  #INF  MdeModulePkg/Bus/Usb/UsbKbDxe/UsbKbDxe.inf
-  INF  Drivers/UsbKbDxe/UsbKbDxe.inf
-  INF  MdeModulePkg/Bus/Usb/UsbMouseDxe/UsbMouseDxe.inf
-!ifndef DISABLE_USB_MASS_STORAGE  
-  INF  MdeModulePkg/Bus/Usb/UsbMassStorageDxe/UsbMassStorageDxe.inf
-!endif  
+#   #INF  MdeModulePkg/Bus/Usb/UsbBusDxe/UsbBusDxe.inf
+#   INF  Drivers/UsbBusDxe/UsbBusDxe.inf
+#   #INF  MdeModulePkg/Bus/Usb/UsbKbDxe/UsbKbDxe.inf
+#   INF  Drivers/UsbKbDxe/UsbKbDxe.inf
+#   INF  MdeModulePkg/Bus/Usb/UsbMouseDxe/UsbMouseDxe.inf
+# !ifndef DISABLE_USB_MASS_STORAGE  
+#   INF  MdeModulePkg/Bus/Usb/UsbMassStorageDxe/UsbMassStorageDxe.inf
+# !endif  
 
-!endif
+# !endif
 
     # ISA Support
 INF  PcAtChipsetPkg/IsaAcpiDxe/IsaAcpi.inf
